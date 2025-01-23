@@ -13,6 +13,7 @@ from langchain_core.documents import Document
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_google_genai import ChatGoogleGenerativeAI, GoogleGenerativeAIEmbeddings
 import streamlit as st
+from streamlit_chat import message
 
 from chateqt.core import TEMPLATE
 
@@ -80,7 +81,7 @@ class ChatbotEQT:
         new_docs = []
         for doc in docs:
             page_content = (
-                "page-number: " + doc.metadata["page_label"] + "\n" + doc.page_content
+                "page-number " + doc.metadata["page_label"] + ": " + doc.page_content
                 if doc.metadata.get("page_label") is not None
                 else doc.page_content
             )
@@ -113,13 +114,12 @@ if __name__ == "__main__":
     st.subheader(
         "Ask me about how AI impacts the different companies in the EQT X fund.",
     )
-    user_question = st.text_input(
-        label="Ask a question related to the AI Index Report.",
-        label_visibility="hidden",
-        placeholder="Type your question here...",
-    )
+    # user_question = st.chat_input(placeholder="Type your question here...")
+    if user_question := st.chat_input("Type your question here..."):
+        message(user_question, avatar_style="no-avatar", is_user=True)
+
     if user_question and len(user_question) > 0:
         relevant_docs = bot.get_relevant_documents(user_question=user_question)
         response = bot.call_llm(user_input=user_question, relevant_docs=relevant_docs)
 
-        st.write(response)
+        message(response, avatar_style="no-avatar")

@@ -27,7 +27,7 @@ def download(output_folder_path: str | None = None) -> None:
 
     logger.info("Download AI Index Report 2024.")
     filename = output_folder_path / "base" / "index_info.pdf"
-    filename.parent.mkdir(parents=True, exist_ok=True)
+    Path(filename).parent.mkdir(parents=True, exist_ok=True)
     url = "https://aiindex.stanford.edu/wp-content/uploads/2024/05/HAI_AI-Index-Report-2024.pdf"
     response = requests.get(url, timeout=60)
     filename.write_bytes(response.content)
@@ -36,7 +36,7 @@ def download(output_folder_path: str | None = None) -> None:
     logger.info("Downloading company specific data.")
     crawler = Crawler()
     companies_output_path = output_folder_path / "companies"
-    companies_output_path.parent.mkdir(parents=True, exist_ok=True)
+    Path(companies_output_path).parent.mkdir(parents=True, exist_ok=True)
     crawler.crawl(companies_output_path)
     logger.info(f"Data downloaded successfully and saved to {output_folder_path}.")
 

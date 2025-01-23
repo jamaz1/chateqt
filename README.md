@@ -2,6 +2,10 @@
 
 This chatbot runs a RAG-based framework using LangChain. It is enriched with information about AI impact on society based on the AI Index Report 2024, as well as with company data within the EQT X's fund. The purpose of the bot is to assist users in understanding how AI impacts the industry and the different companies in the fund.
 
+<center><img src="image.jpg" alt="drawing" width="700"/></center>
+<br>
+<br>
+
 # Installation
 
 1. The package can be installed as
@@ -43,18 +47,25 @@ chateqt online run
 
 # Future improvements and additional features
 
--   **Evaluation**: Develop benchmarks to measure chatbot accuracy, relevance, and response quality using real-world queries and frameworks such as `DeepEval`.
+**Evaluation** \
+Develop benchmarks to measure chatbot accuracy, relevance, and response quality using real-world queries and frameworks such as `DeepEval`.
 
--   **Testing**: Implement unit and integration tests to ensure the chatbot correctly processes PDFs, generated embeddings, etc. without failures.
+**Testing** \
+Implement unit and integration tests to ensure the chatbot correctly processes PDFs, generated embeddings, etc. without failures.
 
--   **Scalability**: Design the system to handle increasing loads efficiently.
+**Scalability** \
+Design the system to handle increasing loads efficiently.
 
--   **Observability**: Introduce logging, monitoring, and alerting to track chatbot performance, errors, and user interactions (storing questions/answers).
+**Observability** \
+Introduce logging, monitoring, and alerting to track chatbot performance, errors, and user interactions (storing questions/answers).
 
--   **Memory**: Implement short-term and long-term memory to retain context across user interactions for a more personalized experience.
+**Memory** \
+Implement short-term and long-term memory to retain context across user interactions for a more personalized experience.
 
--   **Caching**: Use caching strategies to store frequently accessed data and speed up response times for repeated queries.
+**Caching** \
+Use caching strategies to store frequently accessed data and speed up response times for repeated queries.
 
--   **Improved scraping**: Enhance PDF parsing techniques with better text extraction (e.g. tables) as well as improved web-scraping techniques for more efficient data retrieval.
+**Improved scraping** \
+Enhance PDF parsing techniques with better text extraction (e.g. tables) as well as improved web-scraping techniques for more efficient data retrieval.
 
--   **Handle images**: Integrate vision models to extract and allow for image analysis of charts/plots in different reports.
+**Handle images**: Integrate vision models to extract and allow for image analysis of charts/plots in different reports.
