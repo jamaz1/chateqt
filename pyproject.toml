@@ -1,0 +1,147 @@
+[build-system]
+build-backend = "setuptools.build_meta"
+requires = ["setuptools>=61.0"]
+
+[project]
+dynamic = ["version"]
+name = "chateqt"
+requires-python = ">=3.12"
+
+[project.scripts]
+chateqt = "chateqt.app:cli"
+
+[tool.setuptools.dynamic]
+version = {attr = "chateqt.__version__"}
+
+[project.optional-dependencies]
+dev = [
+  "chateqt[prod]",
+  "chateqt[test]",
+  "ruff==0.6.8",
+  "ipywidgets==8.1.5",
+  "ipykernel==6.29.5",
+  "pre-commit",
+  "torch==2.2.2",
+]
+prod = [
+  "Crawl4AI==0.4.247",
+  "typer==0.15.1",
+  "faiss-cpu==1.9.0.post1",
+  "python-dotenv==1.0.1",
+  "langchain==0.3.15",
+  "langchain-google-genai==2.0.9",
+  "langchain-community==0.3.15",
+  "streamlit==1.41.1",
+  "pypdf==5.1.0",
+]
+test = [
+  "chateqt[prod]",
+  "pytest>=7.0",
+  "pytest-cov",
+  "pytest-mock",
+  "tomli",
+]
+
+# ------------------- Tools -------------------
+
+[tool.black]
+exclude = '''
+/(
+  \.eggs
+  | \.git
+  | \.hg
+  | \.ipynb_checkpoints
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | _build
+  | buck-out
+  | build
+  | dist
+)/
+'''
+include = '\.pyi?$'
+line-length = 88
+target-version = ["py310"]
+
+# ------------------- Ruff -------------------
+
+[tool.ruff]
+line-length = 88
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["ALL"]
+
+exclude = [
+  ".eggs",
+  ".git",
+  ".ipynb_checkpoints",
+  "*.ipynb",
+  ".mypy_cache",
+  ".ruff_cache",
+  ".tox",
+  ".venv",
+  "*.egg",
+  "*.pxd",
+  "*.pyx",
+  "__pycache__",
+  "__pypackages__",
+  "_build",
+  "build",
+  "dist",
+]
+
+ignore = [
+  # ==
+  "ANN002", # Missing type annotation for *args
+  "ANN003", # Missing type annotation for **kwargs
+  "ANN101", # Missing type annotation for self in method
+  "ANN102", # Missing type annotation for cls in method
+  "G004", # Logging statement uses string formatting
+  "ERA001", # Found commented out code
+  "PTH123", # ==
+  "D107", # Missing docstring in __init__
+  "D200", # One-line docstring should fit on one line with quotes
+  "D212", # Multi-line docstring summary should start at the first line
+  # ==
+  "Q000", # Remove bad quotes
+  # ==
+  "S101", # Use of assert detected. The enclosed code will be removed when compiling
+  # to optimised byte code.
+]
+
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = [
+  "F401", # Module imported but unused
+]
+"api.py" = [
+  "F401", # Module imported but unused
+]
+"notebooks/*" = [
+  "ALL", # Disable all checks
+  "D100", # Missing docstring in public module
+  "D101", # Missing docstring in public class
+  "D102", # Missing docstring in public method
+  "D103", # Missing docstring in public function
+  "E402", # Module level import not at top of file
+  "E501", # Line too long
+  "ERA001", # Found commented out code
+  "T201", # print found
+]
+"tests/*" = [
+  "D100", # Missing docstring in public module
+  "D101", # Missing docstring in public class
+  "D102", # Missing docstring in public method
+  "D103", # Missing docstring in public function
+]
+
+[tool.ruff.lint.isort]
+force-sort-within-sections = true
+known-first-party = ["chateqt"]
+
+[tool.ruff.lint.mccabe]
+max-complexity = 6
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
