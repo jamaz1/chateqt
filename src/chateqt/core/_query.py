@@ -32,7 +32,7 @@ class ChatbotEQT:
     def __load_embedding_model(self) -> None:
         logger.info("Loading the embedding model.")
         self._embeddings = GoogleGenerativeAIEmbeddings(
-            model=os.environ["EMBEDDING_MODEL_NAME"],
+            model="models/text-embedding-004",
             task_type="retrieval_query",
         )
 

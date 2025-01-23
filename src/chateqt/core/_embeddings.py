@@ -25,7 +25,7 @@ def generate_embeddings(documents: list[Document], output_path: Path) -> None:
         output_path (Path, optional): Path to save the embeddings.
     """
     embeddings = GoogleGenerativeAIEmbeddings(
-        model=os.environ["EMBEDDING_MODEL_NAME"],
+        model="models/text-embedding-004",
         task_type="retrieval_document",
     )
     vectors = FAISS.from_documents(documents, embedding=embeddings)
