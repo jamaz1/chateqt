@@ -45,14 +45,14 @@ class Parser:
     def _merge_short_documents(
         self,
         documents: list[Document],
-        max_length: int = 500,
+        min_length: int = 500,
     ) -> list[Document]:
         final_docs = []
         page_content_buffer = ""
 
         for doc in documents:
             page_content_buffer += "\n" + doc.page_content
-            if len(doc.page_content) < max_length:
+            if len(doc.page_content) < min_length:
                 continue
 
             final_docs.append(
@@ -63,7 +63,7 @@ class Parser:
             )
             page_content_buffer = ""
 
-        return [i for i in final_docs if len(i.page_content) > max_length]
+        return [i for i in final_docs if len(i.page_content) > min_length]
 
     def parse_documents(
         self,
